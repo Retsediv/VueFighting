@@ -24,9 +24,9 @@ new Vue({
             }
         },
 
-        attack() {
+        attack(min, max) {
             // Attack enemy
-            let damage = this.calculateDamage();
+            let damage = this.calculateDamage(min, max);
             this.computerHealth -= damage;
             this.log(`You beat a computer to ${damage} health points`, 'player');
             // Check if player win
@@ -35,7 +35,29 @@ new Vue({
             }
 
             // Attack yourself
-            damage = this.calculateDamage();
+            damage = this.calculateDamage(min, max);
+            this.playerHealth -= damage;
+            this.log(`Computer beat you to ${damage} health points`, 'computer');
+            // Check if computer win
+            this.checkWin();
+        },
+
+        specialAttack(){
+            return this.attack(2, 25);
+        },
+
+        heal(){
+            // Attack enemy
+            let healingPoints = this.calculateDamage();
+            this.playerHealth += healingPoints;
+            this.log(`You healed yourself for ${healingPoints} health points`, 'player');
+            // Check if player win
+            if (this.checkWin()) {
+                return;
+            }
+
+            // Attack yourself
+            let damage = this.calculateDamage();
             this.playerHealth -= damage;
             this.log(`Computer beat you to ${damage} health points`, 'computer');
             // Check if computer win
@@ -63,7 +85,7 @@ new Vue({
         },
 
         log(message, who) {
-            this.logs.push({message, who});
+            this.logs.unshift({message, who});
         }
     }
 });

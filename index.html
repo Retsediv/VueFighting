@@ -43,8 +43,8 @@
 
                 <template v-if="gameStarted">
                     <button type="button" @click="attack()" class="btn btn-lg btn-outline-danger">Attack!</button>
-                    <button type="button" class="btn btn-lg btn-outline-warning">Special attack</button>
-                    <button type="button" class="btn btn-lg btn-outline-success">Heal</button>
+                    <button type="button" @click="specialAttack()" class="btn btn-lg btn-outline-warning">Special attack</button>
+                    <button type="button" @click="heal()" class="btn btn-lg btn-outline-success">Heal</button>
                     <button type="button" @click="giveUp()" class="btn btn-lg btn-outline-primary">Give up</button>
 
                     <div v-show="logs.length" class="fight-log">
