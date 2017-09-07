@@ -15,14 +15,18 @@ new Vue({
         },
         attack() {
             // Attack enemy
-            this.computerHealth -= this.calculateDamage();
+            let damage = this.calculateDamage();
+            this.computerHealth -= damage;
+            this.log(`You beat a computer to ${damage} health points`, 'player');
             // Check if player win
             if (this.checkWin()) {
                 return;
             }
 
             // Attack yourself
-            this.playerHealth -= this.calculateDamage();
+            damage = this.calculateDamage();
+            this.playerHealth -= damage;
+            this.log(`Computer beat you to ${damage} health points`, 'computer');
             // Check if computer win
             this.checkWin();
         },
@@ -47,8 +51,8 @@ new Vue({
             return parseInt(Math.random() * (max - min) + min);
         },
 
-        log(message) {
-            this.logs.push(message);
+        log(message, who) {
+            this.logs.push({message, who});
         }
     }
 });

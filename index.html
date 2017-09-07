@@ -50,12 +50,12 @@
                     <div v-show="logs.length" class="fight-log">
                         <hr>
 
-                        <div class="alert alert-success"
+                        <div class="alert"
                              role="alert"
-                             :class="{'alert-success': true, 'alert-success': false}"
-                             v-for="message in log"
-                             :text="message">
-                        </div   >
+                             :class="{'alert-success': log.who == 'player', 'alert-danger': log.who == 'computer'}"
+                             v-for="log in logs">
+                            {{ log.message }}
+                        </div>
                     </div>
                 </template>
 
