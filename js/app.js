@@ -1,3 +1,7 @@
 new Vue({
-    el: "#app"
+    el: "#app",
+    data: {
+        gameStarted: false,
+        logs: []
+    }
 });

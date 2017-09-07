@@ -1,0 +1,52 @@
+body {
+    padding-top: 25px;
+}
+
+.title {
+    margin-bottom: 30px;
+    color: #2196f3;
+    font-weight: bold;
+}
+
+.progress-container {
+    padding: 0 10px;
+    width: 50%;
+    display: inline-flex;
+}
+
+.progress {
+    background-color: #fff;
+    height: 25px;
+    width: 100%;
+}
+
+.controls button {
+    margin: 0 10px;
+}
+
+.fight-log {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.fight-log .alert {
+    margin-bottom: .5rem;
+}
+
+.bounce-enter-active {
+    animation: bounce-in .5s;
+}
+.bounce-leave-active {
+    animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.35);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
