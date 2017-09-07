@@ -13,6 +13,17 @@ new Vue({
 
             this.gameStarted = true;
         },
+
+        giveUp(){
+            if(confirm("Are you sure that you want to give up?")){
+                this.playerHealth = 50;
+                this.computerHealth = 50;
+                this.logs = [];
+
+                this.gameStarted = false;
+            }
+        },
+
         attack() {
             // Attack enemy
             let damage = this.calculateDamage();
