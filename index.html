@@ -18,17 +18,17 @@
     <div class="progresses">
         <div class="progress-container">
             <div class="progress">
-                <div class="progress-bar progress-bar-animated" role="progressbar" style="width: 20%;"
-                     aria-valuenow="25"
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="{width: playerHealth + '%'}"
+                     :aria-valuenow="playerHealth"
                      aria-valuemin="0"
-                     aria-valuemax="100"></div>
+                     aria-valuemax="100">{{ playerHealth}}</div>
             </div>
         </div><div class="progress-container">
             <div class="progress">
-                <div class="progress-bar progress-bar-animated" role="progressbar" style="width: 20%;"
-                     aria-valuenow="25"
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="{width: computerHealth + '%'}"
+                     :aria-valuenow="computerHealth"
                      aria-valuemin="0"
-                     aria-valuemax="100"></div>
+                     aria-valuemax="100">{{ computerHealth}}</div>
             </div>
         </div>
     </div>
@@ -38,11 +38,11 @@
             <div class="row justify-content-center">
 
                 <template v-if="!gameStarted">
-                    <button type="button" @click="gameStarted = true" class="btn btn-lg btn-outline-success">Are you ready? Click here!</button>
+                    <button type="button" @click="startGame()" class="btn btn-lg btn-outline-success">Are you ready? Click here!</button>
                 </template>
 
                 <template v-if="gameStarted">
-                    <button type="button" class="btn btn-lg btn-outline-danger">Attack!</button>
+                    <button type="button" @click="attack()" class="btn btn-lg btn-outline-danger">Attack!</button>
                     <button type="button" class="btn btn-lg btn-outline-warning">Special attack</button>
                     <button type="button" class="btn btn-lg btn-outline-success">Heal</button>
                     <button type="button" @click="gameStarted = false" class="btn btn-lg btn-outline-primary">Give up</button>
@@ -50,12 +50,12 @@
                     <div v-show="logs.length" class="fight-log">
                         <hr>
 
-                        <div class="alert alert-success" role="alert">
-                            Your turn
-                        </div>
-                        <div class="alert alert-danger" role="alert">
-                            Computer's turn
-                        </div>
+                        <div class="alert alert-success"
+                             role="alert"
+                             :class="{'alert-success': true, 'alert-success': false}"
+                             v-for="message in log"
+                             :text="message">
+                        </div   >
                     </div>
                 </template>
 
