@@ -1,3 +1,10 @@
+const HEAL_MIN = 4,
+    HEAL_MAX = 16,
+    ATTACK_MIN = 6,
+    ATTACK_MAX = 12,
+    SPECIAL_ATTACK_MIN = 2,
+    SPECIAL_ATTACK_MAX = 25;
+
 new Vue({
     el: "#app",
     data: {
@@ -25,7 +32,7 @@ new Vue({
             }
         },
 
-        attack(min, max) {
+        attack(min=ATTACK_MIN, max=ATTACK_MAX) {
             // Attack enemy
             let damage = this.calculateDamage(min, max);
             this.computerHealth -= damage;
@@ -35,32 +42,32 @@ new Vue({
                 return;
             }
 
-            // Attack yourself
-            damage = this.calculateDamage(min, max);
-            this.playerHealth -= damage;
-            this.log(`Computer beat you to ${damage} health points`, 'computer');
-            // Check if computer win
-            this.checkWin();
+            this.monsterAttack(min, max);
         },
 
         specialAttack(){
-            return this.attack(2, 25);
+            return this.attack(SPECIAL_ATTACK_MIN, SPECIAL_ATTACK_MAX);
         },
 
         heal(){
-            // Attack enemy
-            let healingPoints = this.calculateDamage();
-            this.playerHealth += healingPoints;
-            this.log(`You healed yourself for ${healingPoints} health points`, 'player');
-            // Check if player win
-            if (this.checkWin()) {
-                return;
+            // Heal yourself
+            let healingPoints = this.calculateDamage(HEAL_MIN, HEAL_MAX);
+            if (this.playerHealth + healingPoints > 100){
+                this.playerHealth = 100;
+            } else {
+                this.playerHealth += healingPoints;
             }
+            this.log(`You healed yourself for ${healingPoints} health points`, 'player');
 
-            // Attack yourself
-            let damage = this.calculateDamage();
+            this.monsterAttack(ATTACK_MIN, ATTACK_MAX)
+        },
+
+        monsterAttack(min, max){
+            // Computer attack you
+            let damage = this.calculateDamage(min, max);
             this.playerHealth -= damage;
             this.log(`Computer beat you to ${damage} health points`, 'computer');
+
             // Check if computer win
             this.checkWin();
         },
@@ -87,7 +94,7 @@ new Vue({
             return false
         },
 
-        calculateDamage(min = 5, max = 12) {
+        calculateDamage(min, max) {
             return parseInt(Math.random() * (max - min) + min);
         },
 

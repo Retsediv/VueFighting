@@ -41,7 +41,7 @@
                     <button type="button" @click="startGame()" class="btn btn-lg btn-outline-success">Are you ready? Click here!</button>
                 </template>
 
-                <template v-if="gameStarted">
+                <template v-else>
                     <button type="button" @click="attack()" class="btn btn-lg btn-outline-danger">Attack!</button>
                     <button type="button" @click="specialAttack()" class="btn btn-lg btn-outline-warning">Special attack</button>
                     <button type="button" @click="heal()" class="btn btn-lg btn-outline-success">Heal</button>
