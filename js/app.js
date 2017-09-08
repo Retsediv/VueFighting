@@ -10,6 +10,7 @@ new Vue({
         startGame() {
             this.playerHealth = 100;
             this.computerHealth = 100;
+            this.logs = [];
 
             this.gameStarted = true;
         },
@@ -67,12 +68,18 @@ new Vue({
         checkWin() {
             if(this.playerHealth <= 0){
                 this.playerHealth = 0;
-                alert("Computer win(");
+                this.gameStarted = false;
+                if(confirm("You lose. New game?")){
+                    this.startGame();
+                }
 
                 return true;
             } else if (this.computerHealth <= 0){
                 this.computerHealth = 0;
-                alert("You win!");
+                this.gameStarted = false;
+                if(confirm("You win! New game?")){
+                    this.startGame();
+                }
 
                 return true;
             }
